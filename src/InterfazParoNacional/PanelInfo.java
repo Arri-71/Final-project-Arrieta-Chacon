@@ -108,4 +108,16 @@ public class PanelInfo extends JPanel
         add(aux2Info);
         add(aux1Hechos);
     }
+
+    /**
+     * Este metodo se encarga de editar los campos segun la informacion de la victima que el usuario busca
+     * @param pVictima
+     */
+    public void editar(Victima pVictima)
+    {
+        txtNombre.setText(pVictima.darNombres());
+        txtApellido.setText(pVictima.darApellidos());
+        txtCiudad.setText(pVictima.darCiudadOrigen());
+        lblHechos.setText(pVictima.darHechos());
+    }
 }

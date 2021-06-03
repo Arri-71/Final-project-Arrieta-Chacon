@@ -110,4 +110,153 @@ public class PanelBotones extends JPanel   implements ActionListener
         add(butEliminar);
         add(butExportar);
     }
+    /**
+     * Este metodo se encarga de escuhar los botones oprimidos por el usuario
+     */
+    public void actionPerformed(ActionEvent evento)
+    {
+        String comando = evento.getActionCommand();
+        String space = "                                          ";
+        if(comando.equals(AGREGAR))
+        {
+            String apellidosU = JOptionPane.showInputDialog(null, "Ingrese APELLIDOS de la victima:", "AGREGAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+            String nombresU = JOptionPane.showInputDialog(null, "Ingrese NOMBRES de la victima:", "AGREGAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+            String ciudadOrigenU = JOptionPane.showInputDialog(null, "Ingrese la CIUDAD DE ORIGEN de la victima:", "AGREGAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+            String hechosU = JOptionPane.showInputDialog(null, "Describa lo OCURRIDO con la victima:", "AGREGAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+
+            if(!"".equals(nombresU) && !"".equals(apellidosU) && !"".equals(ciudadOrigenU) && !"".equals(hechosU))
+            {
+                if(nombresU != null && apellidosU != null && ciudadOrigenU != null && hechosU != null)
+                {
+                    String idgenerado = ventana.generarID();
+                    Victima victimaAgregar = new Victima(nombresU.toUpperCase().trim(), apellidosU.toUpperCase().trim(), idgenerado.toUpperCase().trim(), ciudadOrigenU.toUpperCase().trim(), hechosU.trim());
+                    ventana.agregarVictima(victimaAgregar);
+
+                    JOptionPane.showMessageDialog(null, "LA VICTIMA SE HA INGRESADO CORRECTAMENTE CON CODIGO: \n\n"+space+"***"+idgenerado+"***\n\n", "EXITOSO", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS ESPACIOS CORRECTAMENTE.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else
+            {
+
+                JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS ESPACIOS CORRECTAMENTE.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if(comando.equals(BUSCAR))
+        {
+            String apellidoU = JOptionPane.showInputDialog(null, "Ingrese APELLIDOS COMPLETO de la victima:", "BUSCAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+            String nombreU = JOptionPane.showInputDialog(null, "Ingrese NOMBRES de la victima:", "BUSCAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+
+            if(nombreU != null && apellidoU != null)
+            {
+                if(nombreU != "" && apellidoU != "")
+                {
+                    ventana.buscarVictima(nombreU.trim(), apellidoU.trim());
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS ESPACIOS CORRECTAMENTE.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS ESPACIOS CORRECTAMENTE.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if(comando.equals(EDITAR))
+        {
+            String apellidoAntes = JOptionPane.showInputDialog(null, "Ingrese APELLIDOS COMPLETO de la victima:", "BUSCAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+            String nombreAntes = JOptionPane.showInputDialog(null, "Ingrese NOMBRES de la victima:", "BUSCAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+
+            if(nombreAntes != null && apellidoAntes != null)
+            {
+                if(nombreAntes != "" && apellidoAntes != "")
+                {
+                    try
+                    {
+                        if(ventana.buscada(nombreAntes, apellidoAntes) != null)
+                        {
+                            JOptionPane.showMessageDialog(null, "La victima SI existe en la base de datos\n\nPor favor ingrese los datos a editar de la victima a continuac�n", "VICTIMA REGISTRADA", JOptionPane.INFORMATION_MESSAGE);
+
+                            String apellidosDespues = JOptionPane.showInputDialog(null, "Ingrese APELLIDOS de la victima:", "AGREGAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+                            String nombresDespues = JOptionPane.showInputDialog(null, "Ingrese NOMBRES de la victima:", "AGREGAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+                            String ciudadOrigenDespues = JOptionPane.showInputDialog(null, "Ingrese la CIUDAD DE ORIGEN de la victima:", "AGREGAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+                            String hechosDespues = JOptionPane.showInputDialog(null, "Describa lo OCURRIDO con la victima:", "AGREGAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+
+                            if(!"".equals(nombresDespues) && !"".equals(apellidosDespues) && !"".equals(ciudadOrigenDespues) && !"".equals(hechosDespues))
+                            {
+                                if(nombresDespues != null && apellidosDespues != null && ciudadOrigenDespues != null && hechosDespues != null)
+                                {
+                                    ventana.editarVictima(nombreAntes.trim(), apellidoAntes.trim(), nombresDespues.toUpperCase().trim(), apellidosDespues.toUpperCase().trim(), ciudadOrigenDespues.toUpperCase().trim(), hechosDespues.trim());
+
+                                    JOptionPane.showMessageDialog(null, "LA VICTIMA SE HA *EDITADO* CORRECTAMENTE", "EXITOSO", JOptionPane.INFORMATION_MESSAGE);
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS ESPACIOS CORRECTAMENTE.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                                }
+                            }
+                            else
+                            {
+
+                                JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS ESPACIOS CORRECTAMENTE.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS ESPACIOS CORRECTAMENTE.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS ESPACIOS CORRECTAMENTE.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if(comando.equals(ELIMINAR))
+        {
+            String apellidoAntes = JOptionPane.showInputDialog(null, "Ingrese APELLIDOS COMPLETO de la victima:", "BUSCAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+            String nombreAntes = JOptionPane.showInputDialog(null, "Ingrese NOMBRES de la victima:", "BUSCAR VICTIMA", JOptionPane.INFORMATION_MESSAGE);
+
+            if(nombreAntes != null && apellidoAntes != null)
+            {
+                if(nombreAntes != "" && apellidoAntes != "")
+                {
+                    ventana.eliminarVictima(nombreAntes, apellidoAntes);
+                    JOptionPane.showMessageDialog(null, "La victima de ha *ELIMINADO* exitosamente ", "EXITOSO", JOptionPane.INFORMATION_MESSAGE);
+
+                    for (int i = 0; i < ventana.darVictimas().size(); i++)
+                    {
+                        System.out.println(ventana.darVictimas().get(i).darId() + " ** " + ventana.darVictimas().get(i).darApellidos()+ " " + ventana.darVictimas().size()) ;
+
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS ESPACIOS CORRECTAMENTE.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS ESPACIOS CORRECTAMENTE.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+        if(comando.equals(EXPORTAR))
+        {
+            ventana.exportarArchivoCSV();
+            JOptionPane.showMessageDialog(null, "El archivo .csv lo puede encontrar en la carpeta de *EXPORTADO*", "EXITOSO", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
 }

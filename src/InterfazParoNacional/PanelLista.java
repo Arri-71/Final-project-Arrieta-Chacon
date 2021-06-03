@@ -52,4 +52,29 @@ public class PanelLista extends JPanel {
         actualizar();
 
     }
+    /**
+     * Este metodo se encarga de crear la tabla con las victimas dentro y posteiormente agregarla al panel
+     */
+    public void actualizar()
+    {
+        ArrayList<Victima> vic = ventana.darVictimas();
+        String[][] res = new String[vic.size()][2];
+
+        for (int i = 0; i < vic.size(); i++)
+        {
+            res[i][0] = vic.get(i).darId();
+            res[i][1] = vic.get(i).darApellidos();
+        }
+
+        DefaultTableModel mod = new DefaultTableModel(res, encabezado);
+
+        tabla = new JTable(mod);
+
+        tabla.setEnabled(false);
+
+        pane = new JScrollPane(tabla);
+        pane.setBounds(40,40,400,200);
+
+        add(pane);
+    }
 }

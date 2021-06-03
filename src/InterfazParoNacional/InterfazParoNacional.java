@@ -71,4 +71,147 @@ public class InterfazParoNacional   extends JFrame {
 
         cerrar();
     }
+    /**
+     * Este metodo regresa la lista de victimas(Base de datos)
+     * @return Lista de victimas
+     */
+    public ArrayList<Victima> darVictimas()
+    {
+        return directorio.darVictimas();
+    }
+
+    /**
+     * Este metodo se encarga de darle incio a la logica para agregar una nueva victima
+     * @param nuevaVictima Victima nueva para ser agregada en la base de datos
+     */
+    public void agregarVictima(Victima nuevaVictima)
+    {
+        directorio.agregarVictima(nuevaVictima);
+    }
+
+    /**
+     * Este metodo se encarga de darle inicio a la logica para buscar una victima
+     * @param pNombre Nombre de la victima que el usuario desea buscar
+     * @param pApellido Apellido de la victima que el usuario desea buscar
+     */
+    public void buscarVictima(String pNombre, String pApellido)
+    {
+        try
+        {
+            Victima encontrada = directorio.buscarVictima(pNombre, pApellido);
+            panelInfo.editar(encontrada);
+            JOptionPane.showMessageDialog(null, "Puede visualizar la informaci?n mas detallada en el panel de INFORMACI?N", "EXITOSO", JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Este metodo se encarga de buscar una victima
+     * @param pNombre Nombre de la victima buscada
+     * @param pApellido Apellido de la victima
+     * @return Victima buscada
+     * @throws Exception Se lanza excepcion cuando la victima que el usuario busca no esta dentro de la base de datos
+     */
+    public Victima buscada(String pNombre, String pApellido) throws Exception
+    {
+        return directorio.buscarVictima(pNombre, pApellido);
+    }
+
+    /**
+     * Este metodo se encarga de darle inicio a la logica para qwue edite una victima
+     * @param pNombreAnterior Nombre actual de la victima dentro de la base de datos
+     * @param pApellidoAnterior Apellido actual de la victima dentro de la base de datos
+     * @param pNombreNuevo Nombre editado
+     * @param pApellidoNuevo Apellido editado
+     * @param pCiudadOrigenNueva Ciudad de origen editada
+     * @param pHechoNuevo Hecho editado
+     */
+    public void editarVictima(String pNombreAnterior, String pApellidoAnterior, String pNombreNuevo, String pApellidoNuevo, String pCiudadOrigenNueva, String pHechoNuevo)
+    {
+        try
+        {
+            directorio.editarVictima(pNombreAnterior, pApellidoAnterior, pNombreNuevo, pApellidoNuevo, pCiudadOrigenNueva, pHechoNuevo);
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Este metodo se encarga de darle incio a la logica para eliminar una victima
+     * @param nombre Nombre de la victima a eliminar
+     * @param apellido Apellido de la victima a eliminar
+     */
+    public void eliminarVictima(String nombre, String apellido)
+    {
+        try
+        {
+            directorio.eliminarVictima(nombre, apellido);
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Este metodo se encarga de darle inicio a la logica para que exporte un archivo .csv con toda la informacion de la base de datos
+     */
+    public void exportarArchivoCSV()
+    {
+        directorio.exportarDirectorioCSV();
+    }
+
+    /**
+     * Este metodo se encarga de crear un codigo se forma interna cuando se agrega una nueva victima
+     * @return
+     */
+    public String generarID()
+    {
+        int id = 1000;
+
+        if(darVictimas().size() != 0)
+        {
+            id = Integer.parseInt((darVictimas().get(darVictimas().size() - 1)).darId())+1;
+        }
+
+        return id+"";
+    }
+
+    /**
+     * Este metodo se encarga de escuchar cuando el usuario cierra la ventana de la interfaz grafica, para luego darle inicio a la logica
+     * para que exporte un archivo de extenion .csv para luego ser persistido con toda la informacion de la base de datos
+     */
+    public void cerrar()
+    {
+        try
+        {
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent e)
+                {
+                    directorio.persisntenciaCSV();
+                    System.exit(0);
+                }
+            });
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * metodo que da inicio a la aplicacion
+     * @param args Argumentos
+     */
+    public static void main(String[]  args)
+    {
+        InterfazParoNacional interfaz = new InterfazParoNacional();
+        interfaz.setVisible(true);
+    }
 }
