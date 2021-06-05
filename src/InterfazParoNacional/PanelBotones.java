@@ -41,6 +41,8 @@ public class PanelBotones extends JPanel   implements ActionListener
      */
     public static final String EXPORTAR = "Exportar";
 
+    public static final String REPORTE = "Reporte";
+
     /**
      * Atributo que modela la relacion del panel con la interfaz grafica
      */
@@ -70,6 +72,8 @@ public class PanelBotones extends JPanel   implements ActionListener
      * Atributo que representa el boton de exportar
      */
     private JButton butExportar;
+
+    private JButton butReporte;
 
     /**
      * Este metodo se encarga de crear en la panel de botones
@@ -104,11 +108,17 @@ public class PanelBotones extends JPanel   implements ActionListener
         butExportar.setActionCommand(EXPORTAR);
         butExportar.addActionListener(this);
 
+        butReporte = new JButton(REPORTE);
+        butReporte.setActionCommand(REPORTE);
+        butReporte.addActionListener(this);
+
+
         add(butAgregar);
         add(butBuscar);
         add(butEditar);
         add(butEliminar);
         add(butExportar);
+        add(butReporte);
     }
     /**
      * Este metodo se encarga de escuhar los botones oprimidos por el usuario
@@ -257,6 +267,11 @@ public class PanelBotones extends JPanel   implements ActionListener
         {
             ventana.exportarArchivoCSV();
             JOptionPane.showMessageDialog(null, "El archivo .csv lo puede encontrar en la carpeta de *EXPORTADO*", "EXITOSO", JOptionPane.INFORMATION_MESSAGE);
+
         }
+        if(comando.equals(REPORTE))
+        {
+
+    }
     }
 }
