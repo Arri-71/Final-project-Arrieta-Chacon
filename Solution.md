@@ -16,3 +16,7 @@ igual que poner " juan perez " ya que el sistema no lo encontrara registrado
 # DIAGRAMA DE CLASES #
 ![WhatsApp Image 2021-06-03 at 4 58 47 PM](https://user-images.githubusercontent.com/78420224/120825311-e06f1880-c51e-11eb-86f6-7be98f69fe2f.jpeg)
 
+# DIAGRAMAS DE SECUENCIA #
+![Secuencia](https://user-images.githubusercontent.com/78420224/120847172-b9bddb80-c538-11eb-853b-a2ed61782ad5.png)
+
+
