@@ -270,7 +270,7 @@ public class PanelBotones extends JPanel   implements ActionListener
 
         }
         if(comando.equals(REPORTE))
-        {
+        {JOptionPane.showMessageDialog(null, ventana.reporte(), "REPORTE", JOptionPane.INFORMATION_MESSAGE);
 
     }
     }

@@ -214,4 +214,7 @@ public class InterfazParoNacional   extends JFrame {
         InterfazParoNacional interfaz = new InterfazParoNacional();
         interfaz.setVisible(true);
     }
+    public String reporte()
+    { return directorio.reporteCiudades();
+    }
 }
