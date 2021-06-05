@@ -231,20 +231,23 @@ public class Directorio {
         for (int i = 0; i < victimas.size(); i++)
         {
             int contador = 1;
+            Victima primera = victimas.get(i);
 
-            //if(yaEstaRevisadaCiudad(ciudadRevisada, victimas.get(i).darCiudadOrigen()) == false)
-            //{
-            for (int j = 1; j < victimas.size(); j++)
+            for (int j =  i + 1; j < victimas.size(); j++)
             {
-                if((victimas.get(i).darCiudadOrigen()).compareToIgnoreCase(victimas.get(j).darCiudadOrigen()) == 0)
+                Victima comparada = victimas.get(j);
+
+                if((primera.darCiudadOrigen()).compareToIgnoreCase(comparada.darCiudadOrigen()) == 0)
                 {
                     contador++;
                 }
             }
 
-            reporte += victimas.get(i).darCiudadOrigen()+ ":"+contador+ "\n";
-            ciudadRevisada.add(victimas.get(i).darCiudadOrigen());
-            //}
+            if(yaEstaRevisadaCiudad(ciudadRevisada, victimas.get(i).darCiudadOrigen()) == false)
+            {
+                reporte += victimas.get(i).darCiudadOrigen()+ ":"+contador+ "\n";
+                ciudadRevisada.add(victimas.get(i).darCiudadOrigen());
+            }
         }
 
         return reporte;
