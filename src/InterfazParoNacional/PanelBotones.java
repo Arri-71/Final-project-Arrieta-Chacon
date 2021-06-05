@@ -244,7 +244,6 @@ public class PanelBotones extends JPanel   implements ActionListener
                 if(nombreAntes != "" && apellidoAntes != "")
                 {
                     ventana.eliminarVictima(nombreAntes, apellidoAntes);
-                    JOptionPane.showMessageDialog(null, "La victima de ha *ELIMINADO* exitosamente ", "EXITOSO", JOptionPane.INFORMATION_MESSAGE);
 
                     for (int i = 0; i < ventana.darVictimas().size(); i++)
                     {

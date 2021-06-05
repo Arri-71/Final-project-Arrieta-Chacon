@@ -151,6 +151,8 @@ public class InterfazParoNacional   extends JFrame {
         try
         {
             directorio.eliminarVictima(nombre, apellido);
+            JOptionPane.showMessageDialog(null, "La victima de ha *ELIMINADO* exitosamente ", "EXITOSO", JOptionPane.INFORMATION_MESSAGE);
+
         }
         catch(Exception e)
         {
