@@ -49,7 +49,7 @@ public class PanelInfo extends JPanel
      * Este metodo se encarga de contruir el panel de informacion dentro de la interfaz
      */
     public PanelInfo() {
-        TitledBorder borde = BorderFactory.createTitledBorder("Informaci�n");
+        TitledBorder borde = BorderFactory.createTitledBorder("Informacion");
         setBorder(borde);
 
         setLayout(new GridLayout(2, 1));
@@ -79,7 +79,7 @@ public class PanelInfo extends JPanel
         aux1Hechos.setLayout(new BorderLayout());
 
         aux1Hechos.add(lblHechos);
-        TitledBorder bordeHecho = BorderFactory.createTitledBorder("Descripci�n del Hecho");
+        TitledBorder bordeHecho = BorderFactory.createTitledBorder("Descripcion del Hecho");
         aux1Hechos.setBorder(bordeHecho);
 
 
